@@ -1,0 +1,21 @@
+version: "3"
+services:
+
+web:
+     build: .
+     ports:
+     - "8080:5000"
+
+     links:
+     - database
+
+     volumes:
+     - .:/javier
+
+database:
+     image: mysql
+     environment:
+     MYSQL_ROOT_PASSWORD: javier
+     MYSQL_DATABASE: javier
+     MYSQL_USER: javier
+     MYSQL_PASSWORD: javier
