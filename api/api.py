@@ -16,7 +16,7 @@ STATUS = {
 }
 
 
-def mensaje_si_estado_no_existe(status_id):
+def abort_if_status_doesnt_exist(status_id):
     if status_id not in STATUS:
         abort(404, message="Estado {} No existe".format(status_id))
 
@@ -25,11 +25,11 @@ parser.add_argument('proyecto')
 
 class Estado(Resource):
     def get(self, status_id):
-        salir_si_estado_no_existe(status_id)
+        abort_if_status_doesnt_exist(status_id)
         return STATUS[status_id]
 
     def delete(self, status_id):
-        salir_si_estado_no_existe(status_id)
+        abort_if_status_doesnt_exist(status_id)
         del STATUS[status_id]
         return '', 204
 
@@ -37,7 +37,7 @@ class Estado(Resource):
         args = parser.parse_args()
         proyecto = {'proyecto': args['proyecto']}
         STATUS[status_id] = proyecto
-        return proyecto, 200
+        return proyecto, 201
 
 class EstatoLista(Resource):
     def get(self):
