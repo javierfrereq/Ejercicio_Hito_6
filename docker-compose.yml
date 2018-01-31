@@ -1,5 +1,9 @@
 version: "3"
 services:
+api: 
+    build: ./Dockerfile
+    ports:	
+    - "8080:5000"
 
 web:
      build: .
@@ -7,15 +11,15 @@ web:
      - "8080:5000"
 
      links:
-     - database
+     - db
 
      volumes:
      - .:/javier
 
-database:
+db:
      image: mysql
      environment:
-     MYSQL_ROOT_PASSWORD: javier
-     MYSQL_DATABASE: javier
+     MYSQL_ROOT_PASSWORD: root
+     MYSQL_DATABASE: db
      MYSQL_USER: javier
      MYSQL_PASSWORD: javier
